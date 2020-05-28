@@ -8,27 +8,26 @@ const glob = require('glob');
 let SPECS = process.env.SPECS || process.argv[2];
 const BROWSER = process.env.BROWSER || process.argv[3];
 const ENV = process.env.ENV || process.argv[4];
+let PODS = process.env.PODS || 2;
 const PODINDEX = process.env.PODINDEX || null;
 
 const specs = {};
-const pods = 2;
 let lastIndex = 0;
-const arrSpec = glob.sync('cypress/integration/**/*.js', {});
+const arrSpec = glob.sync('cypress/integration/*.js', {});
 
 if (!SPECS) {
-    for (let i = 0; i < pods; i += 1) {
-        const nextIndex = lastIndex + Math.floor(arrSpec.length / pods);
-        if (i === pods - 1 && nextIndex !== arrSpec.length) {
+    for (let i = 0; i < PODS; i += 1) {
+        const nextIndex = lastIndex + Math.floor(arrSpec.length / PODS);
+        if (i === PODS - 1 && nextIndex !== arrSpec.length) {
             specs[`pod${i}`] = arrSpec.slice(lastIndex, arrSpec.length);
         } else {
             specs[`pod${i}`] = arrSpec.slice(lastIndex, nextIndex);
         }
         lastIndex = nextIndex;
     }
-
-    SPECS = PODINDEX ? specs[`pod${PODINDEX}`] : [];
+    
+    SPECS = PODINDEX ? specs[`pod${PODINDEX}`] : arrSpec;
 }
-
 
 function generateReport() {
     return merge().then((report) => marge.create(report));
@@ -59,7 +58,7 @@ cypress.run({
     generateReport();
 
     if (fs.existsSync('./cypress/snapshots/actual')) {
-    // normalize folder
+        // normalize folder
         const folder = glob.sync('cypress/snapshots/actual/**/', {});
 
         folder.forEach((folderName) => {

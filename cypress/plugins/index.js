@@ -12,13 +12,13 @@
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
 
-import * as fs from 'fs';
-import * as path from 'path';
+const fs = require('fs');
+const path = require('path');
 
 function getConfigurationByFile(file) {
     const pathToConfigFile = path.resolve('.', 'cypress', 'config', `${file}.json`);
 
-    return fs.readJson(pathToConfigFile);
+    return JSON.parse(fs.readFileSync(pathToConfigFile));
 }
 
 /**
@@ -33,6 +33,6 @@ module.exports = (on, config) => {
         return launchOptions;
     });
 
-    const file = config.env.configFile || 'hml';
+    const file = config.env.configFile || 'default';
     return getConfigurationByFile(file);
 };

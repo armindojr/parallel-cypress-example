@@ -58,7 +58,7 @@ pipeline {
           steps {
             container("docker-slave-${taskNameCF}") {
               script {
-                sh "PODINDEX=0 BROWSER=$BROWSER ENV=hml node cypress-automation-run.js"
+                sh "PODINDEX=0 BROWSER=$BROWSER node cypress-automation-run.js"
               }
             }
           }
@@ -67,7 +67,7 @@ pipeline {
           steps {
             container("docker-slave-${taskNameCF}") {
               script {
-                sh "PODINDEX=1 BROWSER=$BROWSER ENV=hml node cypress-automation-run.js"
+                sh "PODINDEX=1 BROWSER=$BROWSER node cypress-automation-run.js"
               }
             }
           }

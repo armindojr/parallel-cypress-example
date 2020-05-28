@@ -1,10 +1,10 @@
 {   
   "projectId": "mxxwps",
   "video": false,
-  "viewportWidth": 1400,
-  "viewportHeight": 860,
+  "viewportWidth": 1920,
+  "viewportHeight": 1080,
   "chromeWebSecurity": false,
-  "numTestsKeptInMemory": 1,
+  "numTestsKeptInMemory": 10,
   "reporter": "mochawesome",
   "reporterOptions": {
     "overwrite": false,

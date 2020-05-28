@@ -26,6 +26,17 @@
         ],
         "no-global-assign": [
             "warn"
+        ],
+        "spaced-comment": [
+            "error",
+            "always",
+            {
+                "line": {
+                    "markers": [
+                        "/"
+                    ]
+                }
+            }
         ]
     }
 }
