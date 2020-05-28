@@ -1,0 +1,11 @@
+node_modules
+cypress/screenshots
+cypress/snapshots
+cypress/videos
+mochawesome-report
+json_result.json
+package-lock.json
+yarn*
+**.DS_Store**
+.scannerwork
+cypress/fixtures/catalogo

@@ -1,0 +1,31 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "extends": [
+        "airbnb-base",
+        "plugin:cypress/recommended"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "rules": {
+        "indent": [
+            "error",
+            4
+        ],
+        "max-len": [
+            "warn",
+            120
+        ],
+        "no-global-assign": [
+            "warn"
+        ]
+    }
+}
