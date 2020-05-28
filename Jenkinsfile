@@ -104,15 +104,6 @@ pipeline {
           }
         }
       }
-      post {
-        always {
-          container("docker-slave-${taskNameCF}") {  
-            script {
-              print "Send notification"
-            }
-          }
-        }
-      }
     }
   }
 }
