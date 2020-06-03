@@ -15,7 +15,7 @@ pipeline {
             spec:
               containers:
               - name: docker-slave-${taskNameCF}
-                image: '507208215022.dkr.ecr.us-east-1.amazonaws.com/ecr-jenkins-slave-qa:latest'
+                image: 'cypress/browsers:node12.16.1-chrome80-ff73'
                 securityContext:
                   privileged: true
                 resources:
@@ -54,7 +54,7 @@ pipeline {
     }
     stage('cypress parallel tests') {
       parallel {
-        stage('tester A') {
+        stage('POD A') {
           steps {
             container("docker-slave-${taskNameCF}") {
               script {
@@ -63,7 +63,7 @@ pipeline {
             }
           }
         }
-        stage('tester B') {
+        stage('POD B') {
           steps {
             container("docker-slave-${taskNameCF}") {
               script {
@@ -86,20 +86,6 @@ pipeline {
                 reportFiles: 'mochawesome.html',
                 reportName: 'Mochawesome Report'
               ]
-            }
-          }
-        }
-      }
-    }
-    stage("Check Build") {
-      steps {
-        container("docker-slave-${taskNameCF}") {
-          script {
-            def json_mocha = readJSON file: './json_result.json'
-            if (json_mocha['failures'] == 0) {
-                currentBuild.result = 'SUCCESS'
-            }else {
-              currentBuild.result = 'FAILURE'
             }
           }
         }
